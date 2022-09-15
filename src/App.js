@@ -46,7 +46,7 @@ class App extends Component {
 
   experienceLog = (name, title, task, year, year2) => {
     this.setState({
-      education: {
+      experience: {
         name: name,
         title: title,
         task: task,
@@ -85,8 +85,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="container">
+        <div className="general">
           {this.state.showGeneralInputOrDisplay ? (
             <form onSubmit={this.handleGeneralSubmit}>
               <General onGeneral={this.generalLog} />
@@ -94,31 +94,49 @@ class App extends Component {
           ) : null}
           {!this.state.showGeneralInputOrDisplay ? (
             <div className="generalDisplay">
-              <p>{this.state.name}</p>
-              <p>{this.state.email}</p>
-              <p>{this.state.phone}</p>
+              <p>
+                <span>Name:</span>
+                <span>{this.state.name}</span>
+              </p>
+              <p>
+                <span>Email:</span>
+                <span>{this.state.email}</span>
+              </p>
+              <p>
+                <span>Phone Number:</span>
+                <span>{this.state.phone}</span>
+              </p>
               <button onClick={this.handleGeneralEdit}>Edit</button>
             </div>
           ) : null}
         </div>
-        <div>
+        <div className="education">
           {this.state.showEducationInputOrDisplay ? (
-            <form onSubmit={this.handleGeneralSubmit}>
+            <form onSubmit={this.handleEducationSubmit}>
               <Education onEducation={this.educationLog} />
             </form>
           ) : null}
           {!this.state.showEducationInputOrDisplay ? (
             <div className="educationDisplay">
-              <p>{this.state.education.school}</p>
-              <p>{this.state.education.title}</p>
               <p>
-                {this.state.education.year}-{this.state.education.year2}
+                <span>School Name:</span>
+                <span>{this.state.education.school}</span>
+              </p>
+              <p>
+                <span>Field of Study:</span>
+                <span>{this.state.education.title}</span>
+              </p>
+              <p>
+                <span>Time of Study:</span>
+                <span>
+                  {this.state.education.year} - {this.state.education.year2}
+                </span>
               </p>
               <button onClick={this.handleEducationEdit}>Edit</button>
             </div>
           ) : null}
         </div>
-        <div>
+        <div className="experience">
           {this.state.showExperienceInputOrDisplay ? (
             <form onSubmit={this.handleExperienceSubmit}>
               <Experience onExperience={this.experienceLog} />
@@ -126,11 +144,23 @@ class App extends Component {
           ) : null}
           {!this.state.showExperienceInputOrDisplay ? (
             <div className="experienceDisplay">
-              <p>{this.state.experience.name}</p>
-              <p>{this.state.experience.title}</p>
-              <p>{this.state.experience.task}</p>
               <p>
-                {this.state.experience.year}-{this.state.experience.year2}
+                <span>Company Name:</span>
+                <span>{this.state.experience.name}</span>
+              </p>
+              <p>
+                <span>Job Title:</span>
+                <span>{this.state.experience.title}</span>
+              </p>
+              <p>
+                <span>Responsibilities:</span>
+                <span>{this.state.experience.task}</span>
+              </p>
+              <p>
+                <span>Time of Employment:</span>
+                <span>
+                  {this.state.experience.year}-{this.state.experience.year2}
+                </span>
               </p>
               <button onClick={this.handleExperienceEdit}>Edit</button>
             </div>
