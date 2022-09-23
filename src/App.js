@@ -1,174 +1,164 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import General from "./components/General";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showGeneralInputOrDisplay: true,
-      showEducationInputOrDisplay: true,
-      showExperienceInputOrDisplay: true,
-      name: "",
-      email: "",
-      phone: "",
-      education: {
-        school: "",
-        title: "",
-        year: "",
-        year2: "",
-      },
-      experience: {
-        name: "",
-        title: "",
-        task: "",
-        year: "",
-        year2: "",
-      },
-    };
-    this.generalLog = this.generalLog.bind(this);
-  }
-  generalLog = (name, email, phone) => {
-    this.setState({ name: name, email: email, phone: phone });
+function App(props) {
+  const [general, setGeneral] = useState({ name: "", email: "", phone: "" });
+  const [education, setEducation] = useState({
+    school: "",
+    title: "",
+    year: "",
+    year2: "",
+  });
+  const [experience, setExperience] = useState({
+    name: "",
+    title: "",
+    task: "",
+    year: "",
+    year2: "",
+  });
+  const [showGeneralInputOrDisplay, setShowGeneralInputOrDisplay] =
+    useState(true);
+  const [showEducationInputOrDisplay, setShowEducationInputOrDisplay] =
+    useState(true);
+  const [showExperienceInputOrDisplay, setShowExperienceInputOrDisplay] =
+    useState(true);
+
+  const generalLog = (name, email, phone) => {
+    setGeneral({ name: name, email: email, phone: phone });
   };
 
-  educationLog = (school, title, year, year2) => {
-    this.setState({
-      education: {
-        school: school,
-        title: title,
-        year: year,
-        year2: year2,
-      },
+  const educationLog = (school, title, year, year2) => {
+    setEducation({
+      school: school,
+      title: title,
+      year: year,
+      year2: year2,
     });
   };
 
-  experienceLog = (name, title, task, year, year2) => {
-    this.setState({
-      experience: {
-        name: name,
-        title: title,
-        task: task,
-        year: year,
-        year2: year2,
-      },
+  const experienceLog = (name, title, task, year, year2) => {
+    setExperience({
+      name: name,
+      title: title,
+      task: task,
+      year: year,
+      year2: year2,
     });
   };
 
-  handleGeneralSubmit = (e) => {
+  const handleGeneralSubmit = (e) => {
     e.preventDefault();
-    this.setState({ showGeneralInputOrDisplay: false });
+    setShowGeneralInputOrDisplay(false);
   };
 
-  handleGeneralEdit = () => {
-    this.setState({ showGeneralInputOrDisplay: true });
+  const handleGeneralEdit = () => {
+    setShowGeneralInputOrDisplay(true);
   };
 
-  handleEducationSubmit = (e) => {
+  const handleEducationSubmit = (e) => {
     e.preventDefault();
-    this.setState({ showEducationInputOrDisplay: false });
+    setShowEducationInputOrDisplay(false);
   };
 
-  handleEducationEdit = () => {
-    this.setState({ showEducationInputOrDisplay: true });
+  const handleEducationEdit = () => {
+    setShowEducationInputOrDisplay(true);
   };
 
-  handleExperienceSubmit = (e) => {
+  const handleExperienceSubmit = (e) => {
     e.preventDefault();
-    this.setState({ showExperienceInputOrDisplay: false });
+    setShowExperienceInputOrDisplay(false);
   };
 
-  handleExperienceEdit = () => {
-    this.setState({ showExperienceInputOrDisplay: true });
+  const handleExperienceEdit = () => {
+    setShowExperienceInputOrDisplay(true);
   };
 
-  render() {
-    return (
-      <div className="container">
-        <div className="general">
-          {this.state.showGeneralInputOrDisplay ? (
-            <form onSubmit={this.handleGeneralSubmit}>
-              <General onGeneral={this.generalLog} />
-            </form>
-          ) : null}
-          {!this.state.showGeneralInputOrDisplay ? (
-            <div className="generalDisplay">
-              <p>
-                <span>Name:</span>
-                <span>{this.state.name}</span>
-              </p>
-              <p>
-                <span>Email:</span>
-                <span>{this.state.email}</span>
-              </p>
-              <p>
-                <span>Phone Number:</span>
-                <span>{this.state.phone}</span>
-              </p>
-              <button onClick={this.handleGeneralEdit}>Edit</button>
-            </div>
-          ) : null}
-        </div>
-        <div className="education">
-          {this.state.showEducationInputOrDisplay ? (
-            <form onSubmit={this.handleEducationSubmit}>
-              <Education onEducation={this.educationLog} />
-            </form>
-          ) : null}
-          {!this.state.showEducationInputOrDisplay ? (
-            <div className="educationDisplay">
-              <p>
-                <span>School Name:</span>
-                <span>{this.state.education.school}</span>
-              </p>
-              <p>
-                <span>Field of Study:</span>
-                <span>{this.state.education.title}</span>
-              </p>
-              <p>
-                <span>Time of Study:</span>
-                <span>
-                  {this.state.education.year} - {this.state.education.year2}
-                </span>
-              </p>
-              <button onClick={this.handleEducationEdit}>Edit</button>
-            </div>
-          ) : null}
-        </div>
-        <div className="experience">
-          {this.state.showExperienceInputOrDisplay ? (
-            <form onSubmit={this.handleExperienceSubmit}>
-              <Experience onExperience={this.experienceLog} />
-            </form>
-          ) : null}
-          {!this.state.showExperienceInputOrDisplay ? (
-            <div className="experienceDisplay">
-              <p>
-                <span>Company Name:</span>
-                <span>{this.state.experience.name}</span>
-              </p>
-              <p>
-                <span>Job Title:</span>
-                <span>{this.state.experience.title}</span>
-              </p>
-              <p>
-                <span>Responsibilities:</span>
-                <span>{this.state.experience.task}</span>
-              </p>
-              <p>
-                <span>Time of Employment:</span>
-                <span>
-                  {this.state.experience.year}-{this.state.experience.year2}
-                </span>
-              </p>
-              <button onClick={this.handleExperienceEdit}>Edit</button>
-            </div>
-          ) : null}
-        </div>
+  return (
+    <div className="container">
+      <div className="general">
+        {showGeneralInputOrDisplay ? (
+          <form onSubmit={handleGeneralSubmit}>
+            <General generalLog={generalLog} />
+          </form>
+        ) : null}
+        {!showGeneralInputOrDisplay ? (
+          <div className="generalDisplay">
+            <p>
+              <span>Name:</span>
+              <span>{general.name}</span>
+            </p>
+            <p>
+              <span>Email:</span>
+              <span>{general.email}</span>
+            </p>
+            <p>
+              <span>Phone Number:</span>
+              <span>{general.phone}</span>
+            </p>
+            <button onClick={handleGeneralEdit}>Edit</button>
+          </div>
+        ) : null}
       </div>
-    );
-  }
+      <div className="education">
+        {showEducationInputOrDisplay ? (
+          <form onSubmit={handleEducationSubmit}>
+            <Education educationLog={educationLog} />
+          </form>
+        ) : null}
+        {!showEducationInputOrDisplay ? (
+          <div className="educationDisplay">
+            <p>
+              <span>School Name:</span>
+              <span>{education.school}</span>
+            </p>
+            <p>
+              <span>Field of Study:</span>
+              <span>{education.title}</span>
+            </p>
+            <p>
+              <span>Time of Study:</span>
+              <span>
+                {education.year} - {education.year2}
+              </span>
+            </p>
+            <button onClick={handleEducationEdit}>Edit</button>
+          </div>
+        ) : null}
+      </div>
+      <div className="experience">
+        {showExperienceInputOrDisplay ? (
+          <form onSubmit={handleExperienceSubmit}>
+            <Experience experienceLog={experienceLog} />
+          </form>
+        ) : null}
+        {!showExperienceInputOrDisplay ? (
+          <div className="experienceDisplay">
+            <p>
+              <span>Company Name:</span>
+              <span>{experience.name}</span>
+            </p>
+            <p>
+              <span>Job Title:</span>
+              <span>{experience.title}</span>
+            </p>
+            <p>
+              <span>Responsibilities:</span>
+              <span>{experience.task}</span>
+            </p>
+            <p>
+              <span>Time of Employment:</span>
+              <span>
+                {experience.year}-{experience.year2}
+              </span>
+            </p>
+            <button onClick={handleExperienceEdit}>Edit</button>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
 }
 
 export default App;

@@ -1,110 +1,89 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Experience extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      title: "",
-      task: "",
-      time: "",
-      time2: "",
-    };
-  }
-  log = () => {
-    const experienceState = this.state;
-    this.props.onExperience(
-      experienceState.name,
-      experienceState.title,
-      experienceState.task,
-      experienceState.time,
-      experienceState.time2
-    );
+function Experience({ experienceLog }) {
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [task, setTask] = useState("");
+  const [time, setTime] = useState("");
+  const [time2, setTime2] = useState("");
+
+  const nameChange = (e) => {
+    setName(e.target.value);
   };
 
-  nameChange = (e) => {
-    this.setState({ name: e.target.value });
+  const titleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  titleChange = (e) => {
-    this.setState({
-      title: e.target.value,
-    });
+  const taskChange = (e) => {
+    setTask(e.target.value);
   };
 
-  taskChange = (e) => {
-    this.setState({
-      task: e.target.value,
-    });
+  const timeChange = (e) => {
+    setTime(e.target.value);
   };
 
-  timeChange = (e) => {
-    this.setState({
-      time: e.target.value,
-    });
+  const time2Change = (e) => {
+    setTime2(e.target.value);
   };
 
-  time2Change = (e) => {
-    this.setState({
-      time2: e.target.value,
-    });
-  };
-
-  render() {
-    return (
-      <div>
-        <p>
-          <label htmlFor="companyName">Company Name</label>
-          <input
-            type="text"
-            id="companyName"
-            onChange={this.nameChange}
-            value={this.state.name}
-          />
-        </p>
-        <p>
-          <label htmlFor="title">Job Title</label>
-          <input
-            type="text"
-            id="title"
-            onChange={this.titleChange}
-            value={this.state.title}
-          />
-        </p>
-        <p>
-          <label htmlFor="task">Responsibilities of your Position</label>
-          <input
-            type="text"
-            id="task"
-            onChange={this.taskChange}
-            value={this.state.task}
-          />
-        </p>
-        <p>
-          <p>Time of Employment</p>
-          <label htmlFor="time">From</label>
-          <input
-            type="date"
-            id="time"
-            onChange={this.timeChange}
-            value={this.state.time}
-          />
-        </p>
-        <p>
-          <label htmlFor="time2">To</label>
-          <input
-            type="date"
-            id="time2"
-            onChange={this.time2Change}
-            value={this.state.time2}
-          />
-        </p>
-        <p>
-          <input type="submit" value="Submit" onClick={this.log} />
-        </p>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <p>
+        <label htmlFor="companyName">Company Name</label>
+        <input
+          type="text"
+          id="companyName"
+          onChange={(e) => nameChange(e)}
+          value={name}
+        />
+      </p>
+      <p>
+        <label htmlFor="title">Job Title</label>
+        <input
+          type="text"
+          id="title"
+          onChange={(e) => titleChange(e)}
+          value={title}
+        />
+      </p>
+      <p>
+        <label htmlFor="task">Responsibilities of your Position</label>
+        <input
+          type="text"
+          id="task"
+          onChange={(e) => taskChange(e)}
+          value={task}
+        />
+      </p>
+      <p>
+        <p>Time of Employment</p>
+        <label htmlFor="time">From</label>
+        <input
+          type="date"
+          id="time"
+          onChange={(e) => timeChange(e)}
+          value={time}
+        />
+      </p>
+      <p>
+        <label htmlFor="time2">To</label>
+        <input
+          type="date"
+          id="time2"
+          onChange={(e) => time2Change(e)}
+          value={time2}
+        />
+      </p>
+      <p>
+        <input
+          type="submit"
+          value="Submit"
+          onClick={() => experienceLog(name, title, task, time, time2)}
+        />
+      </p>
+    </div>
+  );
 }
 
 export default Experience;
